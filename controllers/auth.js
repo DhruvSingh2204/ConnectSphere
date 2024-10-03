@@ -1,33 +1,47 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
-const mongoose = require('mongoose')
 const User = require('../model/User')
 const PostDB = require('../model/Post')
 const notificationDB = require('../model/Notification')
+const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 exports.login = async (req , res) => {
     const {userName , password} = req.body;
 
     try {
+        if(!userName) {
+            console.log('no username')
+            return res.status(200).json({'message' : `please input userName`})
+        }
+        if(!password) {
+            console.log('no password')
+            return res.status(200).json({'message' : `please input password`})
+        }
         const foundUser = await User.findOne({username : userName})
 
         if(!foundUser) {
-            res.json({'message' : `User - ${userName} not found , Kindly sign up first`})
-            return `${userName} not found`
+            return res.status(200).json({'message' : `User not found`})
         }
 
         const pwdMatch = await bcrypt.compare(password , foundUser.password);
 
         if(!pwdMatch) {
-            res.json({'message' : `Incorrect UserName or Password`})
-            return 'Incorrect UserName or Password'
+            return res.status(200).json({'message' : `Wrong Password`});
         }
 
         console.log(`${userName} Logged In!!`)
 
+        const token = jwt.sign(
+            { id: foundUser._id, userName: foundUser.username, email: foundUser.email },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
         return res.status(200).json({
-            'message': `User ${foundUser.username} logged in!`,
+            'message': `User ${foundUser.username} logged in!!`,
+            'token' : token ,
             'user': {
                 id: foundUser._id,
                 userName: foundUser.username,
@@ -46,6 +60,18 @@ exports.signUp = async (req , res) => {
     console.log('inside signUp function')
 
     try {
+        if(!userName) {
+            console.log('no username')
+            return res.status(200).json({'message' : `please input userName`})
+        }
+        if(!password) {
+            console.log('no password')
+            return res.status(200).json({'message' : `please input password`})
+        }
+        if(!email) {
+            console.log('no email')
+            return res.status(200).json({'message' : `please input email`})
+        }
         const foundUser = await User.findOne({ username: userName });
 
         if(foundUser) {
@@ -67,7 +93,6 @@ exports.signUp = async (req , res) => {
 
         newUserForPost.friends.push(userName);
 
-        // Save the updated document to persist the changes
         await newUserForPost.save();
 
         const newUserNotifications = await notificationDB.create({
@@ -76,8 +101,15 @@ exports.signUp = async (req , res) => {
 
         console.log(newUser);
 
+        const token = jwt.sign(
+            { id: foundUser._id, userName: foundUser.username, email: foundUser.email },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
         return res.status(200).json({
             'message': `New User - ${newUser.username} created`,
+            'token' : token,
             'user': {
                 id: newUser._id,
                 userName: newUser.username,

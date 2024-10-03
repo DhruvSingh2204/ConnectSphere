@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Login({setCorrectUN , setCorrectEmail}) {
-    const [userName , setuserName] = useState('');
-    const [email , setEmail] = useState('');
-    const [password , setPassword] = useState('');
-    const [login , setLogin] = useState(false)
-    const [loginSuccess , setLoginSuccess] = useState(false)
+function Login({ setCorrectUN, setCorrectEmail }) {
+    const [userName, setuserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [login, setLogin] = useState(false)
+    const [loginSuccess, setLoginSuccess] = useState(false)
     const navigate = useNavigate();
 
     async function handleSignUp(e) {
@@ -16,18 +16,45 @@ function Login({setCorrectUN , setCorrectEmail}) {
 
         try {
             const response = await axios.post('http://localhost:5000/auth/signUp', {
-                userName, 
+                userName,
                 password,
                 email
             });
-    
+
+            console.log(response.data)
+
+            const token = response.data.token;
+            if (token) {
+                localStorage.setItem('token', token);
+                console.log('Token stored successfully:', token);
+            } else {
+                console.error('No token received');
+            }
+
+            const responseDivSignup = document.getElementById('responseDivSignUp');
+
+            if (response.data.message == 'please input userName') {
+                responseDivSignup.innerText = 'Please input userName'
+                return;
+            }
+
+            if (response.data.message == 'please input password') {
+                responseDivSignup.innerText = 'Please input password'
+                return;
+            }
+
+            if (response.data.message == 'please input email') {
+                responseDivSignup.innerText = 'Please input email'
+                return;
+            }
+
             setCorrectUN(response.data.user.userName)
             setCorrectEmail(response.data.user.email)
 
-            localStorage.setItem('user' , JSON.stringify(response.data.user.userName))
-            localStorage.setItem('email' , JSON.stringify(response.data.user.email))
+            localStorage.setItem('user', JSON.stringify(response.data.user.userName))
+            localStorage.setItem('email', JSON.stringify(response.data.user.email))
 
-            if(response.request.status == 200) {
+            if (response.request.status == 200) {
                 setLoginSuccess(true)
                 navigate('/main')
             }
@@ -40,22 +67,55 @@ function Login({setCorrectUN , setCorrectEmail}) {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:5000/auth/login' , {
-                userName ,
-                password 
+            const response = await axios.post('http://localhost:5000/auth/login', {
+                userName,
+                password
             });
+
+            console.log(response.data)
+
+            const responseDivLogin = document.getElementById('responseDivLogin');
+
+            if (response.data.message == 'please input userName') {
+                responseDivLogin.innerText = 'Please input userName';
+                console.log('Please input userName')
+                return;
+            }
+
+            if (response.data.message == 'please input password') {
+                responseDivLogin.innerText = 'Please input password';
+                return;
+            }
+
+            if (response.data.message == 'Wrong Password') {
+                responseDivLogin.innerText = 'Wrong Password';
+                return;
+            }
+
+            if (response.data.message == 'User not found') {
+                responseDivLogin.innerText = 'User not found'
+                return;
+            }
+
+            const token = response.data.token;
+            if (token) {
+                localStorage.setItem('token', token);
+                console.log('Token stored successfully:', token);
+            } else {
+                console.error('No token received');
+            }
 
             setCorrectUN(response.data.user.userName)
             setCorrectEmail(response.data.user.email)
 
-            localStorage.setItem('user' , JSON.stringify(response.data.user.userName))
-            localStorage.setItem('email' , JSON.stringify(response.data.user.email))
+            localStorage.setItem('user', JSON.stringify(response.data.user.userName))
+            localStorage.setItem('email', JSON.stringify(response.data.user.email))
 
-            if(response.request.status == 200) {
+            if (response.request.status == 200) {
                 setLoginSuccess(true)
                 navigate('/main')
             }
-        } catch(err) {
+        } catch (err) {
             console.log(err)
         }
     }
@@ -65,7 +125,7 @@ function Login({setCorrectUN , setCorrectEmail}) {
             {!login ? <div id='signUp'>
                 <h1>Sign Up</h1>
                 <div>
-                    <input placeholder='userName' value={userName} onChange={(e) => setuserName(e.target.value)} id='input1'/>
+                    <input placeholder='userName' value={userName} onChange={(e) => setuserName(e.target.value)} id='input1' />
                     <input placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} id='input2' />
                     <input placeholder='Email-ID' value={email} onChange={(e) => setEmail(e.target.value)} id='input3' />
                 </div>

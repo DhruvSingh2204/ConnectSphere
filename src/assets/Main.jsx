@@ -150,11 +150,12 @@ function Main({ correctUN }) {
             const showlikesButton = document.createElement('button');
             const showcommentsButton = document.createElement('button');
     
-            showcommentsButton.innerText = 'Show Comments';
+            showcommentsButton.innerHTML = 'Show Comments';
             showcommentsButton.style.cssText = buttonStyle;
             showlikesButton.innerText = 'Show Likes';
             showlikesButton.style.cssText = buttonStyle;
-            likeButton.innerText = 'Like';
+            likeButton.innerText = 'Like'
+
             likeButton.style.cssText = buttonStyle;
     
             const senderr = response.data.sender[i];
@@ -337,7 +338,6 @@ const Container = styled.div`
         background-color: white;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
-        max-height: auto;
 
         div {
             background-color: #e9ecef;
@@ -356,16 +356,20 @@ const Container = styled.div`
                 height: auto;
                 border-radius: 10px;
                 margin-top: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             }
 
-            #player {
+            video {
+                max-width: 100%;
+                height: auto;
+                border-radius: 10px;
                 margin-top: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             }
         }
     }
 
     button {
-        width: 100%;
         padding: 10px;
         border-radius: 10px;
         background-color: #007bff;
@@ -377,6 +381,35 @@ const Container = styled.div`
 
         &:hover {
             background-color: #0056b3;
+        }
+    }
+
+    .like-button {
+        background-color: green;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: darkgreen;
+        }
+    }
+
+    .like-button.red {
+        background-color: red;
+    }
+
+    .comment-button {
+        background-color: #2196F3;
+
+        &:hover {
+            background-color: #1976d2;
+        }
+    }
+
+    .show-button {
+        background-color: #6c757d;
+
+        &:hover {
+            background-color: #5a6268;
         }
     }
 `;

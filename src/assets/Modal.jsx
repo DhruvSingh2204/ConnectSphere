@@ -5,7 +5,8 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 function Modal(props) {
     useEffect(() => {
         if (props.show === "followers" && props.followers.length > 0) {
-            if (props.following.length == 1) {
+            console.log('followers are -> ' , props.followers)
+            if (props.followers.length == 1) {
                 document.getElementById('maindiv').innerText = 'No Followers'
                 return;
             }

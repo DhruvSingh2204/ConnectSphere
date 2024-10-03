@@ -13,14 +13,13 @@ function Chat({ correctUN, chatWith }) {
         }
     }, [chatWith]);
 
-    // Enable real-time chat by listening for new messages from the server
     useEffect(() => {
         socket.on('receiveMessage', ({correctUN , chatWith}) => {
-            loadChat(); // Refresh chat when a new message is received
+            loadChat();
         });
 
         return () => {
-            socket.off('receiveMessage'); // Clean up the listener on component unmount
+            socket.off('receiveMessage');
         };
     }, [correctUN , chatWith]);
 

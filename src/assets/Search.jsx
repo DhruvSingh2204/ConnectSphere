@@ -4,7 +4,17 @@ import styled from 'styled-components';
 
 function Search({ correctUN }) {
     async function search() {
-        const response = await axios.post('http://localhost:5000/search/persons', {});
+        const token = localStorage.getItem('token');
+        const response = await axios.post(
+            'http://localhost:5000/search/persons',
+            {},
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        );
+
         const mainDiv = document.getElementById('mainDiv');
         mainDiv.innerText = '';
 
@@ -16,7 +26,7 @@ function Search({ correctUN }) {
             const check = await axios.post('http://localhost:5000/req/check', {
                 // sender: i.username ,
                 // recipient: correctUN
-                sender: correctUN ,
+                sender: correctUN,
                 recipient: i.username
             });
 
@@ -71,7 +81,7 @@ function Search({ correctUN }) {
 
         const response = await axios.post('http://localhost:5000/search/person', { correctUN, friendToBeFound });
 
-        if(response.data == 'Person Not Found') {
+        if (response.data == 'Person Not Found') {
             const mainDiv = document.getElementById('mainDiv').innerText = '';
             const div = document.createElement('div');
             div.className = 'result-card';

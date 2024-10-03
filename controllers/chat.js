@@ -30,11 +30,10 @@ exports.loadChat = async (req, res) => {
         }).exec();
 
         if (!chatRoom) {
-            // If no chat room exists, create a new one with default values for required fields
             chatRoom = new ChatDB({
                 username1: correctUN,
                 username2: chatWith,
-                msgf1to2: [],   // Initialize empty arrays for required fields
+                msgf1to2: [],
                 msgf2to1: [],
                 datef1to2: [],
                 datef2to1: []
