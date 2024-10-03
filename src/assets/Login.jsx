@@ -113,17 +113,17 @@ const Container = styled.div`
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better contrast */
+        background-color: rgba(0, 0, 0, 0.5);
         z-index: 1;
     }
 
     #signUp, #Login {
         position: relative;
         z-index: 2;
-        background: rgba(255, 255, 255, 0.85); /* Translucent white background */
+        background: rgba(255, 255, 255, 0.85);
         padding: 50px;
         border-radius: 30px;
-        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -142,7 +142,7 @@ const Container = styled.div`
         div {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center aligns input fields */
+            align-items: center;
             width: 100%;
 
             input {
@@ -151,7 +151,7 @@ const Container = styled.div`
                 border-radius: 30px;
                 padding: 0 20px;
                 border: 1px solid #ddd;
-                width: 80%; /* Inputs now take 80% of form width */
+                width: 80%;
                 font-size: 1rem;
                 box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
                 transition: all 0.3s ease;
@@ -171,7 +171,7 @@ const Container = styled.div`
             background-color: #3498db;
             color: white;
             border: none;
-            width: 80%; /* Buttons now take 80% of form width */
+            width: 80%;
             font-size: 1.1rem;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
