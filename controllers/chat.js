@@ -1,5 +1,6 @@
 const PostDB = require('../model/Post');
-const ChatDB = require('../model/chatRooms')
+const ChatDB = require('../model/chatRooms');
+const verifyjwt = require('../middleware/verifyJWT');
 
 exports.loadProfiles = async (req, res) => {
     try {

@@ -26,7 +26,7 @@ function Navigator() {
                 <li><Link to="/search">Search</Link></li>
                 <li><Link to="/profile">My Profile</Link></li>
                 <li><Link to="/req">Notifications</Link></li>
-                <li><a href="#">More</a></li>
+                {/* <li><a href="#">More</a></li> */}
                 <li><Link to="/" onClick={handleLogout}>LogOut</Link></li>
             </BurgerNav>
         </Container>

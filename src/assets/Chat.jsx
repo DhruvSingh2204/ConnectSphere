@@ -14,19 +14,25 @@ function Chat({ correctUN, chatWith }) {
     }, [chatWith]);
 
     useEffect(() => {
-        socket.on('receiveMessage', ({correctUN , chatWith}) => {
+        socket.on('receiveMessage', ({ correctUN, chatWith }) => {
             loadChat();
         });
 
         return () => {
             socket.off('receiveMessage');
         };
-    }, [correctUN , chatWith]);
+    }, [correctUN, chatWith]);
 
     async function loadChat() {
-        console.log('in loadChat ->' , correctUN , chatWith);
+        console.log('in loadChat ->', correctUN, chatWith);
+        const token = localStorage.getItem('token');
         const response = await axios.post('http://localhost:5000/chat/loadChat', {
             correctUN, chatWith
+        }
+        , {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         });
 
         let arr = [];
@@ -61,6 +67,7 @@ function Chat({ correctUN, chatWith }) {
                 const tempDiv = document.createElement('div');
                 if (temp.type === '1to2') {
                     name = correctUN;
+                    tempDiv.style.backgroundColor = 'lightgreen'
                     tempDiv.style.float = 'right';
                 } else {
                     name = chatWith;
@@ -85,6 +92,7 @@ function Chat({ correctUN, chatWith }) {
                 const tempDiv = document.createElement('div');
                 if (temp.type === '2to1') {
                     name = correctUN;
+                    tempDiv.style.backgroundColor = 'lightgreen'
                     tempDiv.style.float = 'right';
                 } else {
                     name = chatWith;
@@ -108,7 +116,7 @@ function Chat({ correctUN, chatWith }) {
             return;
         }
 
-        console.log('in sendMsg ->' , correctUN , chatWith);
+        console.log('in sendMsg ->', correctUN, chatWith);
         const message = document.getElementById('msg').value;
 
         if (message.trim() === '') {

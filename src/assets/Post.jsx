@@ -22,14 +22,14 @@ function Post({ correctUN }) {
         formData.append('editorText', editorText);
 
         if (shareImage) {
-            formData.append('shareImage', shareImage);  // Add image to FormData
+            formData.append('shareImage', shareImage);
         }
 
         if (shareVideo) {
-            formData.append('shareVideo', shareVideo);  // Add video to FormData
+            formData.append('shareVideo', shareVideo); 
         }
 
-        formData.append('videoLink', videoLink);  // Add video link
+        formData.append('videoLink', videoLink);
 
         const response = await axios.post('http://localhost:5000/post/article', formData, {
             headers: {

@@ -102,7 +102,7 @@ exports.signUp = async (req , res) => {
         console.log(newUser);
 
         const token = jwt.sign(
-            { id: foundUser._id, userName: foundUser.username, email: foundUser.email },
+            {id: newUser._id , userName: newUser.username, email: newUser.email },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );

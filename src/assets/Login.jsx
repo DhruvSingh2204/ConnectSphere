@@ -26,7 +26,6 @@ function Login({ setCorrectUN, setCorrectEmail }) {
             const token = response.data.token;
             if (token) {
                 localStorage.setItem('token', token);
-                console.log('Token stored successfully:', token);
             } else {
                 console.error('No token received');
             }
@@ -100,7 +99,6 @@ function Login({ setCorrectUN, setCorrectEmail }) {
             const token = response.data.token;
             if (token) {
                 localStorage.setItem('token', token);
-                console.log('Token stored successfully:', token);
             } else {
                 console.error('No token received');
             }

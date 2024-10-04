@@ -12,6 +12,7 @@ const cors = require('cors')
 const path = require('path');
 const server = http.createServer(app);
 const jwt = require('jsonwebtoken');
+const verifyjwt = require('./middleware/verifyJWT');
 
 const io = new Server(server, {
     cors: {
@@ -28,32 +29,11 @@ app.use(express.json())
 
 connectDB();
 
-const verifyToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if (!token) {
-        console.log('token not found');
-        return res.status(403).send('Token is required');
-    }
-
-    console.log('token is ->' , token)
-
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
-        next();
-    } catch (error) {
-        console.log('invalid token' , error)
-        return res.status(401).send('Invalid Token');
-    }
-};
-
 app.use('/auth', require('./routes/auth'))
 
 app.use('/post', require('./routes/post'))
 
-app.use('/search', verifyToken, require('./routes/search'))
+app.use('/search', verifyjwt.verifyToken, require('./routes/search'))
 
 app.use('/load', require('./routes/load'))
 
@@ -65,7 +45,7 @@ app.use('/like', require('./routes/like'))
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.use('/chat', verifyToken, require('./routes/chat'))
+app.use('/chat', require('./routes/chat'))
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB')

@@ -126,6 +126,114 @@ export default Profile
 
 const Container = styled.div`
     margin-left: 25vw;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    #div1 {
+        width: 80%;
+        border-bottom: 2px solid #ccc;
+        display: flex;
+        padding-bottom: 10px;
+        align-items: center;
+
+        img {
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 3px solid #007bff;
+        }
+    }
+
+    #topDiv {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        align-items: flex-start;
+        margin-bottom: 20px;
+
+        h5 {
+            color: #555;
+            margin: 5px 0;
+        }
+
+        h4 {
+            margin: 10px 0;
+        }
+    }
+
+    #topInDiv {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+
+        button {
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: none;
+            font-weight: bold;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+
+            &:first-child {
+                background-color: #28a745;
+            }
+
+            &:nth-child(2) {
+                background-color: #17a2b8;
+            }
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+        }
+    }
+
+    #DescriptionDiv {
+        margin-top: 20px;
+        width: 80%;
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #aaa;
+            margin-bottom: 20px;
+        }
+    }
+
+    #posts {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+
+        .post {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #343a40;
+            font-weight: 500;
+            font-size: 16px;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            &:nth-child(3n) {
+                background-color: #e1f7e1;
+            }
+
+            &:nth-child(2n) {
+                background-color: #fef4e1;
+            }
+        }
+    }
 
     button {
         padding: 8px 12px;
@@ -139,95 +247,6 @@ const Container = styled.div`
 
         &:hover {
             background-color: #0056b3;
-        }
-    }
-
-    #topDiv {
-        display: flex;
-        width: 40%;
-        justify-content: space-between;
-        align-items: center;
-        flex-direction: column;
-        margin-bottom: 20px;
-
-        h5 {
-            margin-left: -75px;
-        }
-    }
-
-    #topInDiv {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 20vw;
-
-        button {
-            background-color: #28a745;
-            margin-left: 10px;
-        }
-
-        button:nth-child(2) {
-            background-color: #17a2b8;
-        }
-    }
-
-    #div1 {
-        width: 80%;
-        border-bottom: 2px solid gray;
-        display: flex;
-        padding-bottom: 10px;
-
-        img {
-            height: 100px;
-            border-radius: 50%;
-            margin-right: 20px;
-            border: 3px solid #007bff;
-        }
-    }
-
-    #DescriptionDiv {
-        margin-top: 20px;
-        width: 80%;
-
-        h1 {
-            text-align: center;
-            color: #007bff;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px #aaa;
-        }
-    }
-
-    #posts {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        margin-top: 20px;
-
-        .post {
-            background-color: #e9ecef;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            color: #343a40;
-            font-weight: 500;
-            font-size: 16px;
-
-            &:hover {
-                transform: translateY(-8px);
-                box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-                background-color: #288cef;
-            }
-
-            &:nth-child(3n) {
-                background-color: #3ae060;
-            }
-
-            &:nth-child(2n) {
-                background-color: #e1b72f;
-            }
         }
     }
 `;

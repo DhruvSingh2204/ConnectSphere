@@ -79,7 +79,14 @@ function Search({ correctUN }) {
 
         document.getElementById('mainDiv').innerText = ''
 
-        const response = await axios.post('http://localhost:5000/search/person', { correctUN, friendToBeFound });
+        const token = localStorage.getItem('token');
+        const response = await axios.post('http://localhost:5000/search/person', { correctUN, friendToBeFound } ,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        );
 
         if (response.data == 'Person Not Found') {
             const mainDiv = document.getElementById('mainDiv').innerText = '';
@@ -168,6 +175,7 @@ export default Search;
 const Container = styled.div`
     margin-left: 25vw;
     width: 50%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a more modern font */
 
     input {
         width: 100%;
@@ -175,11 +183,18 @@ const Container = styled.div`
         height: 5vh;
         padding: 0 15px;
         font-size: 1.15rem;
-        border-radius: 20px;
+        border-radius: 25px; /* More rounded corners */
         border: 1px solid #ddd;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9; /* Light background for input */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         margin-bottom: 10px;
         outline: none;
+        transition: border-color 0.3s, box-shadow 0.3s;
+
+        &:focus {
+            border-color: #0d47a1;
+            box-shadow: 0 0 5px rgba(13, 71, 161, 0.5);
+        }
     }
 
     .search-button {
@@ -188,53 +203,62 @@ const Container = styled.div`
         height: 40px;
         padding: 10px;
         border: none;
-        border-radius: 20px;
-        background-color: #0d47a1;
+        border-radius: 25px; /* Match input corners */
+        background: linear-gradient(135deg, #0d47a1, #003c8f); /* Gradient background */
         color: white;
         font-size: 1rem;
         cursor: pointer;
         margin: 5px 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s, transform 0.1s;
 
         &:hover {
-            background-color: #003c8f;
+            background: linear-gradient(135deg, #003c8f, #002d72);
         }
 
         &:active {
-            background-color: #002d72;
+            transform: scale(0.95);
         }
     }
 
     .result-card {
-        border: 1px solid #ccc;
-        padding: 10px;
+        border: none; /* Remove border for cleaner look */
+        padding: 15px;
         margin: 10px 0;
-        background-color: #e3f2fd;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background: rgba(227, 242, 253, 0.9); /* Slightly transparent background */
+        border-radius: 12px; /* Softer corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        transition: transform 0.2s, box-shadow 0.2s;
+
+        &:hover {
+            transform: translateY(-3px); /* More pronounced lift */
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+        }
     }
 
     .result-info {
         margin: 5px 0;
-        font-family: Arial, sans-serif;
         color: #0d47a1;
+        font-weight: 600; /* Slightly bolder text for emphasis */
+        font-size: 1.1rem; /* Increase font size */
     }
 
     .request-button {
         margin-top: 10px;
-        padding: 5px 10px;
+        padding: 8px 15px;
         border: none;
-        border-radius: 5px;
-        background-color: #0d47a1;
+        border-radius: 25px; /* Match other buttons */
+        background: linear-gradient(135deg, #0d47a1, #003c8f);
         color: white;
         cursor: pointer;
+        transition: background 0.3s, transform 0.1s;
 
         &:hover {
-            background-color: #003c8f;
+            background: linear-gradient(135deg, #003c8f, #002d72);
         }
 
         &:active {
-            background-color: #002d72;
+            transform: scale(0.95);
         }
     }
 `;

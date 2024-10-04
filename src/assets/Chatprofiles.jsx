@@ -10,7 +10,14 @@ function Chatprofiles({ correctUN , setChatWith }) {
     }, [correctUN])
 
     async function loadChatProfiles() {
-        const response = await axios.post('http://localhost:5000/chat/loadProfiles');
+        const token = localStorage.getItem('token');
+        const response = await axios.post('http://localhost:5000/chat/loadProfiles' , {} 
+            , {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        );
         
         const profilesDiv = document.getElementById('profiles')
 
