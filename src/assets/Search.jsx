@@ -173,88 +173,99 @@ function Search({ correctUN }) {
 export default Search;
 
 const Container = styled.div`
-    margin-left: 25vw;
-    width: 50%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a more modern font */
+    margin: 40px auto;
+    max-width: 600px;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 
     input {
         width: 100%;
-        max-width: 300px;
-        height: 5vh;
+        height: 45px;
         padding: 0 15px;
-        font-size: 1.15rem;
-        border-radius: 25px; /* More rounded corners */
-        border: 1px solid #ddd;
-        background-color: #f9f9f9; /* Light background for input */
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 10px;
+        font-size: 1.1rem;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         outline: none;
-        transition: border-color 0.3s, box-shadow 0.3s;
+        transition: border 0.3s, box-shadow 0.3s;
 
         &:focus {
-            border-color: #0d47a1;
-            box-shadow: 0 0 5px rgba(13, 71, 161, 0.5);
+            border-color: #1565c0;
+            box-shadow: 0 0 5px rgba(21, 101, 192, 0.4);
         }
     }
 
     .search-button {
         width: 100%;
-        max-width: 150px;
-        height: 40px;
-        padding: 10px;
+        max-width: 180px;
+        height: 42px;
+        padding: 10px 15px;
         border: none;
-        border-radius: 25px; /* Match input corners */
-        background: linear-gradient(135deg, #0d47a1, #003c8f); /* Gradient background */
+        border-radius: 25px;
+        background: linear-gradient(135deg, #1565c0, #0d47a1);
         color: white;
         font-size: 1rem;
         cursor: pointer;
-        margin: 5px 0;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
         transition: background 0.3s, transform 0.1s;
 
         &:hover {
-            background: linear-gradient(135deg, #003c8f, #002d72);
+            background: linear-gradient(135deg, #0d47a1, #003c8f);
         }
 
         &:active {
-            transform: scale(0.95);
+            transform: scale(0.96);
         }
     }
 
+    #mainDiv {
+        width: 100%;
+        margin-top: 20px;
+    }
+
     .result-card {
-        border: none; /* Remove border for cleaner look */
-        padding: 15px;
-        margin: 10px 0;
-        background: rgba(227, 242, 253, 0.9); /* Slightly transparent background */
-        border-radius: 12px; /* Softer corners */
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        padding: 18px;
+        margin: 12px 0;
+        background: #e3f2fd;
+        border-radius: 16px;
+        box-shadow: 0 3px 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         transition: transform 0.2s, box-shadow 0.2s;
 
         &:hover {
-            transform: translateY(-3px); /* More pronounced lift */
-            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
     }
 
     .result-info {
-        margin: 5px 0;
         color: #0d47a1;
-        font-weight: 600; /* Slightly bolder text for emphasis */
-        font-size: 1.1rem; /* Increase font size */
+        font-weight: 600;
+        font-size: 1.1rem;
     }
 
     .request-button {
-        margin-top: 10px;
-        padding: 8px 15px;
+        align-self: flex-start;
+        padding: 8px 16px;
         border: none;
-        border-radius: 25px; /* Match other buttons */
-        background: linear-gradient(135deg, #0d47a1, #003c8f);
+        border-radius: 25px;
+        background: linear-gradient(135deg, #1565c0, #0d47a1);
         color: white;
+        font-size: 0.95rem;
         cursor: pointer;
         transition: background 0.3s, transform 0.1s;
 
         &:hover {
-            background: linear-gradient(135deg, #003c8f, #002d72);
+            background: linear-gradient(135deg, #0d47a1, #003c8f);
         }
 
         &:active {
