@@ -21,7 +21,7 @@ function Login({ setCorrectUN, setCorrectEmail }) {
                 email
             });
 
-            console.log(response.data)
+            // console.log(response.data)
 
             const token = response.data.token;
             if (token) {
